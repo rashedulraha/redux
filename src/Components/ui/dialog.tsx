@@ -31,10 +31,10 @@ const Dialog: React.FC<DialogProps> = ({ open, onOpenChange, children }) => {
   if (!open) return null;
 
   return createPortal(
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 animate-in fade-in duration-150">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity"
+        className="fixed inset-0 bg-black/40 backdrop-blur-xs transition-opacity"
         onClick={() => onOpenChange(false)}
         aria-hidden="true"
       />
@@ -53,7 +53,7 @@ const DialogContent = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "relative w-full rounded-2xl border border-zinc-200 bg-white p-6 shadow-2xl transition-all duration-200 dark:border-zinc-800 dark:bg-zinc-950 sm:p-8",
+        "relative w-full rounded border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-950 sm:p-7",
         className
       )}
       onClick={(e) => e.stopPropagation()}
@@ -63,10 +63,10 @@ const DialogContent = React.forwardRef<
         <button
           type="button"
           onClick={onClose}
-          className="absolute right-4 top-4 rounded-lg p-1.5 text-zinc-400 transition-colors hover:bg-zinc-100 hover:text-zinc-700 dark:hover:bg-zinc-800 dark:hover:text-zinc-200"
+          className="absolute right-4 top-4 rounded p-1 text-zinc-400 transition-colors hover:bg-zinc-100 hover:text-zinc-700 dark:hover:bg-zinc-800 dark:hover:text-zinc-200"
           aria-label="Close dialog"
         >
-          <X className="h-5 w-5" />
+          <X className="h-4 w-4" />
         </button>
       )}
       {children}
@@ -81,7 +81,7 @@ const DialogHeader = ({
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
     className={cn(
-      "flex flex-col space-y-1.5 text-left pb-4 border-b border-zinc-100 dark:border-zinc-800",
+      "flex flex-col space-y-1 pb-4 border-b border-zinc-100 dark:border-zinc-800",
       className
     )}
     {...props}
@@ -96,7 +96,7 @@ const DialogTitle = React.forwardRef<
   <h2
     ref={ref}
     className={cn(
-      "text-xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100",
+      "text-lg font-semibold tracking-tight text-zinc-900 dark:text-zinc-100",
       className
     )}
     {...props}
@@ -110,7 +110,7 @@ const DialogDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn("text-sm text-zinc-500 dark:text-zinc-400", className)}
+    className={cn("text-xs text-zinc-500 dark:text-zinc-400", className)}
     {...props}
   />
 ));
@@ -122,7 +122,7 @@ const DialogFooter = ({
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
     className={cn(
-      "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-3 pt-6 border-t border-zinc-100 dark:border-zinc-800",
+      "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2 pt-5 border-t border-zinc-100 dark:border-zinc-800",
       className
     )}
     {...props}

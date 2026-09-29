@@ -43,7 +43,6 @@ export const NewTaskModal: React.FC<NewTaskModalProps> = ({
       category: category.trim() || "General",
     };
 
-    // User requirement: console.log the data on submit
     console.log("New Task Submitted to Redux UI:", taskPayload);
 
     onSubmit(taskPayload);
@@ -60,27 +59,20 @@ export const NewTaskModal: React.FC<NewTaskModalProps> = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent onClose={onClose} className="sm:max-w-lg">
+      <DialogContent onClose={onClose} className="rounded border border-zinc-200 dark:border-zinc-800 sm:max-w-md">
         <DialogHeader>
-          <div className="flex items-center gap-2">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-zinc-900 text-white dark:bg-white dark:text-zinc-900">
-              <Plus className="h-4 w-4" />
-            </div>
-            <div>
-              <DialogTitle>Create New Task</DialogTitle>
-              <DialogDescription>
-                Add a new task to your Redux state management workflow
-              </DialogDescription>
-            </div>
-          </div>
+          <DialogTitle>Create New Task</DialogTitle>
+          <DialogDescription>
+            Enter task details to manage via Redux Toolkit state
+          </DialogDescription>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit} className="space-y-4 pt-4">
+        <form onSubmit={handleSubmit} className="space-y-3.5 pt-3">
           {/* Task Title */}
-          <div className="space-y-1.5">
+          <div className="space-y-1">
             <label
               htmlFor="task-title"
-              className="text-xs font-semibold text-zinc-700 dark:text-zinc-300"
+              className="text-xs font-medium text-zinc-700 dark:text-zinc-300"
             >
               Task Title <span className="text-rose-500">*</span>
             </label>
@@ -88,18 +80,18 @@ export const NewTaskModal: React.FC<NewTaskModalProps> = ({
               id="task-title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder="e.g. Implement createAsyncThunk for API call"
+              placeholder="e.g. Implement createSlice for Todo state"
               required
               autoFocus
-              className="rounded-xl"
+              className="h-8 rounded text-xs"
             />
           </div>
 
           {/* Description */}
-          <div className="space-y-1.5">
+          <div className="space-y-1">
             <label
               htmlFor="task-desc"
-              className="text-xs font-semibold text-zinc-700 dark:text-zinc-300"
+              className="text-xs font-medium text-zinc-700 dark:text-zinc-300"
             >
               Description
             </label>
@@ -108,48 +100,48 @@ export const NewTaskModal: React.FC<NewTaskModalProps> = ({
               rows={3}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              placeholder="Add task notes, acceptance criteria, or implementation details..."
-              className="w-full rounded-xl border border-zinc-200 bg-white p-3 text-sm text-zinc-900 shadow-sm transition-colors placeholder:text-zinc-400 focus:border-zinc-900 focus:outline-none focus:ring-1 focus:ring-zinc-900 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100 dark:placeholder:text-zinc-500 dark:focus:border-zinc-100 dark:focus:ring-zinc-100"
+              placeholder="Add details, acceptance criteria, or notes..."
+              className="w-full rounded border border-zinc-200 bg-white p-2.5 text-xs text-zinc-900 placeholder:text-zinc-400 focus:border-zinc-950 focus:outline-none dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100 dark:placeholder:text-zinc-500 dark:focus:border-zinc-200"
             />
           </div>
 
           {/* Priority & Status in 2 columns */}
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
             {/* Priority */}
-            <div className="space-y-1.5">
+            <div className="space-y-1">
               <label
                 htmlFor="task-priority"
-                className="flex items-center gap-1 text-xs font-semibold text-zinc-700 dark:text-zinc-300"
+                className="flex items-center gap-1 text-xs font-medium text-zinc-700 dark:text-zinc-300"
               >
-                <Flag className="h-3.5 w-3.5 text-zinc-400" />
+                <Flag className="h-3 w-3 text-zinc-400" />
                 Priority
               </label>
               <select
                 id="task-priority"
                 value={priority}
                 onChange={(e) => setPriority(e.target.value as TaskPriority)}
-                className="h-10 w-full rounded-xl border border-zinc-200 bg-white px-3 text-sm text-zinc-700 shadow-sm transition-colors focus:border-zinc-900 focus:outline-none focus:ring-1 focus:ring-zinc-900 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-300"
+                className="h-8 w-full rounded border border-zinc-200 bg-white px-2 text-xs text-zinc-700 focus:border-zinc-950 focus:outline-none dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-300"
               >
-                <option value="high">🔴 High Priority</option>
-                <option value="medium">🟡 Medium Priority</option>
-                <option value="low">🟢 Low Priority</option>
+                <option value="high">High Priority</option>
+                <option value="medium">Medium Priority</option>
+                <option value="low">Low Priority</option>
               </select>
             </div>
 
             {/* Status */}
-            <div className="space-y-1.5">
+            <div className="space-y-1">
               <label
                 htmlFor="task-status"
-                className="flex items-center gap-1 text-xs font-semibold text-zinc-700 dark:text-zinc-300"
+                className="flex items-center gap-1 text-xs font-medium text-zinc-700 dark:text-zinc-300"
               >
-                <Clock className="h-3.5 w-3.5 text-zinc-400" />
+                <Clock className="h-3 w-3 text-zinc-400" />
                 Initial Status
               </label>
               <select
                 id="task-status"
                 value={status}
                 onChange={(e) => setStatus(e.target.value as TaskStatus)}
-                className="h-10 w-full rounded-xl border border-zinc-200 bg-white px-3 text-sm text-zinc-700 shadow-sm transition-colors focus:border-zinc-900 focus:outline-none focus:ring-1 focus:ring-zinc-900 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-300"
+                className="h-8 w-full rounded border border-zinc-200 bg-white px-2 text-xs text-zinc-700 focus:border-zinc-950 focus:outline-none dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-300"
               >
                 <option value="pending">Pending</option>
                 <option value="in-progress">In Progress</option>
@@ -159,40 +151,40 @@ export const NewTaskModal: React.FC<NewTaskModalProps> = ({
           </div>
 
           {/* Due Date & Category in 2 columns */}
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
             {/* Due Date */}
-            <div className="space-y-1.5">
+            <div className="space-y-1">
               <label
                 htmlFor="task-duedate"
-                className="flex items-center gap-1 text-xs font-semibold text-zinc-700 dark:text-zinc-300"
+                className="flex items-center gap-1 text-xs font-medium text-zinc-700 dark:text-zinc-300"
               >
-                <Calendar className="h-3.5 w-3.5 text-zinc-400" />
-                Due Date / Target
+                <Calendar className="h-3 w-3 text-zinc-400" />
+                Due Date
               </label>
               <Input
                 id="task-duedate"
                 value={dueDate}
                 onChange={(e) => setDueDate(e.target.value)}
-                placeholder="e.g. Tomorrow, Oct 15"
-                className="rounded-xl"
+                placeholder="e.g. Tomorrow"
+                className="h-8 rounded text-xs"
               />
             </div>
 
             {/* Category */}
-            <div className="space-y-1.5">
+            <div className="space-y-1">
               <label
                 htmlFor="task-category"
-                className="flex items-center gap-1 text-xs font-semibold text-zinc-700 dark:text-zinc-300"
+                className="flex items-center gap-1 text-xs font-medium text-zinc-700 dark:text-zinc-300"
               >
-                <Tag className="h-3.5 w-3.5 text-zinc-400" />
-                Category / Tag
+                <Tag className="h-3 w-3 text-zinc-400" />
+                Category
               </label>
               <Input
                 id="task-category"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                placeholder="e.g. Redux Toolkit, API"
-                className="rounded-xl"
+                placeholder="e.g. Redux Toolkit"
+                className="h-8 rounded text-xs"
               />
             </div>
           </div>
@@ -201,17 +193,19 @@ export const NewTaskModal: React.FC<NewTaskModalProps> = ({
             <Button
               type="button"
               variant="outline"
+              size="sm"
               onClick={onClose}
-              className="rounded-xl"
+              className="h-8 rounded text-xs"
             >
               Cancel
             </Button>
             <Button
               type="submit"
-              className="rounded-xl bg-zinc-900 text-white hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900"
+              size="sm"
+              className="h-8 gap-1.5 rounded bg-zinc-900 text-xs font-medium text-white hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900"
             >
-              <Plus className="mr-1.5 h-4 w-4" />
-              Create Task
+              <Plus className="h-3.5 w-3.5" />
+              <span>Create Task</span>
             </Button>
           </DialogFooter>
         </form>
