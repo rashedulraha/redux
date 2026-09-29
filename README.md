@@ -1,75 +1,56 @@
-# React + TypeScript + Vite
+# Redux Learning
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A hands-on repository for learning **Redux** and **Redux Toolkit** from the fundamentals to practical state management patterns.
 
-Currently, two official plugins are available:
+## 📚 What I'm Learning
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Redux fundamentals
+- Store, State & Actions
+- Reducers
+- Dispatch
+- Selectors
+- Redux Toolkit (RTK)
+- `createSlice`
+- `configureStore`
+- `createAsyncThunk`
+- Async state management
+- API integration with Redux
+- React-Redux
+- Global state management patterns
+- Best practices
 
-## React Compiler
+## 🛠️ Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React
+- TypeScript
+- Redux
+- Redux Toolkit
+- React-Redux
 
-## Expanding the ESLint configuration
+## 📂 Repository Structure
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```text
+redux-learning/
+├── basics/
+├── redux-toolkit/
+├── async/
+├── api-integration/
+└── projects/
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+## 🎯 Goal
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+The goal of this repository is to build a strong understanding of Redux and Redux Toolkit through **practice, experimentation, and small projects**.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🚀 Progress
 
-```
+- [x] Redux Fundamentals
+- [ ] Redux Toolkit
+- [ ] Async Operations
+- [ ] API Integration
+- [ ] Advanced Patterns
+- [ ] Real-world Project
+
+---
+
+> Learning Redux step by step through practical implementation.
