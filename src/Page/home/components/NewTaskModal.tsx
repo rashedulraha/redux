@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Plus, Calendar, Flag, Tag, Clock } from "lucide-react";
 import { Button } from "@/Components/ui/button";
 import { Input } from "@/Components/ui/input";
+import { CustomSelect, type SelectOption } from "@/Components/ui/select";
 import {
   Dialog,
   DialogContent,
@@ -17,6 +18,18 @@ interface NewTaskModalProps {
   onClose: () => void;
   onSubmit: (task: Omit<TaskItem, "id" | "createdAt">) => void;
 }
+
+const MODAL_PRIORITY_OPTIONS: SelectOption[] = [
+  { value: "high", label: "High Priority", dotColor: "bg-rose-500" },
+  { value: "medium", label: "Medium Priority", dotColor: "bg-amber-500" },
+  { value: "low", label: "Low Priority", dotColor: "bg-emerald-500" },
+];
+
+const MODAL_STATUS_OPTIONS: SelectOption[] = [
+  { value: "pending", label: "Pending", dotColor: "bg-amber-500" },
+  { value: "in-progress", label: "In Progress", dotColor: "bg-blue-500" },
+  { value: "completed", label: "Done", dotColor: "bg-emerald-500" },
+];
 
 export const NewTaskModal: React.FC<NewTaskModalProps> = ({
   isOpen,
@@ -59,7 +72,7 @@ export const NewTaskModal: React.FC<NewTaskModalProps> = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent onClose={onClose} className="rounded border border-zinc-200 dark:border-zinc-800 sm:max-w-md">
+      <DialogContent onClose={onClose} className="rounded-sm border border-zinc-800 bg-zinc-950 sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Create New Task</DialogTitle>
           <DialogDescription>
@@ -72,9 +85,9 @@ export const NewTaskModal: React.FC<NewTaskModalProps> = ({
           <div className="space-y-1">
             <label
               htmlFor="task-title"
-              className="text-xs font-medium text-zinc-700 dark:text-zinc-300"
+              className="text-xs font-medium text-zinc-300"
             >
-              Task Title <span className="text-rose-500">*</span>
+              Task Title <span className="text-rose-400">*</span>
             </label>
             <Input
               id="task-title"
@@ -83,7 +96,7 @@ export const NewTaskModal: React.FC<NewTaskModalProps> = ({
               placeholder="e.g. Implement createSlice for Todo state"
               required
               autoFocus
-              className="h-8 rounded text-xs"
+              className="h-8 rounded-sm text-xs"
             />
           </div>
 
@@ -91,7 +104,7 @@ export const NewTaskModal: React.FC<NewTaskModalProps> = ({
           <div className="space-y-1">
             <label
               htmlFor="task-desc"
-              className="text-xs font-medium text-zinc-700 dark:text-zinc-300"
+              className="text-xs font-medium text-zinc-300"
             >
               Description
             </label>
@@ -101,52 +114,44 @@ export const NewTaskModal: React.FC<NewTaskModalProps> = ({
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Add details, acceptance criteria, or notes..."
-              className="w-full rounded border border-zinc-200 bg-white p-2.5 text-xs text-zinc-900 placeholder:text-zinc-400 focus:border-zinc-950 focus:outline-none dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100 dark:placeholder:text-zinc-500 dark:focus:border-zinc-200"
+              className="w-full rounded-sm border border-zinc-800 bg-zinc-900 p-2.5 text-xs text-zinc-100 placeholder:text-zinc-500 focus:border-zinc-500 focus:outline-none"
             />
           </div>
 
-          {/* Priority & Status in 2 columns */}
+          {/* Priority & Status with CustomSelect */}
           <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
             {/* Priority */}
             <div className="space-y-1">
               <label
-                htmlFor="task-priority"
-                className="flex items-center gap-1 text-xs font-medium text-zinc-700 dark:text-zinc-300"
+                className="flex items-center gap-1 text-xs font-medium text-zinc-300"
               >
-                <Flag className="h-3 w-3 text-zinc-400" />
+                <Flag className="h-3 w-3 text-zinc-500" />
                 Priority
               </label>
-              <select
-                id="task-priority"
+              <CustomSelect
                 value={priority}
-                onChange={(e) => setPriority(e.target.value as TaskPriority)}
-                className="h-8 w-full rounded border border-zinc-200 bg-white px-2 text-xs text-zinc-700 focus:border-zinc-950 focus:outline-none dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-300"
-              >
-                <option value="high">High Priority</option>
-                <option value="medium">Medium Priority</option>
-                <option value="low">Low Priority</option>
-              </select>
+                onValueChange={(val) => setPriority(val as TaskPriority)}
+                options={MODAL_PRIORITY_OPTIONS}
+                className="w-full"
+                triggerClassName="w-full h-8 rounded-sm border-zinc-800 bg-zinc-900"
+              />
             </div>
 
             {/* Status */}
             <div className="space-y-1">
               <label
-                htmlFor="task-status"
-                className="flex items-center gap-1 text-xs font-medium text-zinc-700 dark:text-zinc-300"
+                className="flex items-center gap-1 text-xs font-medium text-zinc-300"
               >
-                <Clock className="h-3 w-3 text-zinc-400" />
+                <Clock className="h-3 w-3 text-zinc-500" />
                 Initial Status
               </label>
-              <select
-                id="task-status"
+              <CustomSelect
                 value={status}
-                onChange={(e) => setStatus(e.target.value as TaskStatus)}
-                className="h-8 w-full rounded border border-zinc-200 bg-white px-2 text-xs text-zinc-700 focus:border-zinc-950 focus:outline-none dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-300"
-              >
-                <option value="pending">Pending</option>
-                <option value="in-progress">In Progress</option>
-                <option value="completed">Done</option>
-              </select>
+                onValueChange={(val) => setStatus(val as TaskStatus)}
+                options={MODAL_STATUS_OPTIONS}
+                className="w-full"
+                triggerClassName="w-full h-8 rounded-sm border-zinc-800 bg-zinc-900"
+              />
             </div>
           </div>
 
@@ -156,9 +161,9 @@ export const NewTaskModal: React.FC<NewTaskModalProps> = ({
             <div className="space-y-1">
               <label
                 htmlFor="task-duedate"
-                className="flex items-center gap-1 text-xs font-medium text-zinc-700 dark:text-zinc-300"
+                className="flex items-center gap-1 text-xs font-medium text-zinc-300"
               >
-                <Calendar className="h-3 w-3 text-zinc-400" />
+                <Calendar className="h-3 w-3 text-zinc-500" />
                 Due Date
               </label>
               <Input
@@ -166,7 +171,7 @@ export const NewTaskModal: React.FC<NewTaskModalProps> = ({
                 value={dueDate}
                 onChange={(e) => setDueDate(e.target.value)}
                 placeholder="e.g. Tomorrow"
-                className="h-8 rounded text-xs"
+                className="h-8 rounded-sm text-xs"
               />
             </div>
 
@@ -174,9 +179,9 @@ export const NewTaskModal: React.FC<NewTaskModalProps> = ({
             <div className="space-y-1">
               <label
                 htmlFor="task-category"
-                className="flex items-center gap-1 text-xs font-medium text-zinc-700 dark:text-zinc-300"
+                className="flex items-center gap-1 text-xs font-medium text-zinc-300"
               >
-                <Tag className="h-3 w-3 text-zinc-400" />
+                <Tag className="h-3 w-3 text-zinc-500" />
                 Category
               </label>
               <Input
@@ -184,7 +189,7 @@ export const NewTaskModal: React.FC<NewTaskModalProps> = ({
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
                 placeholder="e.g. Redux Toolkit"
-                className="h-8 rounded text-xs"
+                className="h-8 rounded-sm text-xs"
               />
             </div>
           </div>
@@ -195,14 +200,14 @@ export const NewTaskModal: React.FC<NewTaskModalProps> = ({
               variant="outline"
               size="sm"
               onClick={onClose}
-              className="h-8 rounded text-xs"
+              className="h-8 rounded-md text-xs border-zinc-800 text-zinc-300 hover:bg-zinc-900"
             >
               Cancel
             </Button>
             <Button
               type="submit"
               size="sm"
-              className="h-8 gap-1.5 rounded bg-zinc-900 text-xs font-medium text-white hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900"
+              className="h-8 gap-1.5 rounded-md bg-white text-xs font-medium text-zinc-950 hover:bg-zinc-200"
             >
               <Plus className="h-3.5 w-3.5" />
               <span>Create Task</span>

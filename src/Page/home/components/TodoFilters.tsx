@@ -1,6 +1,7 @@
 import React from "react";
-import { Search, ChevronDown, RotateCcw, X } from "lucide-react";
+import { Search, RotateCcw, X } from "lucide-react";
 import { Button } from "@/Components/ui/button";
+import { CustomSelect, type SelectOption } from "@/Components/ui/select";
 import type { FilterStatus, FilterPriority, SortOption } from "../types";
 
 interface TodoFiltersProps {
@@ -16,6 +17,28 @@ interface TodoFiltersProps {
   hasActiveFilters: boolean;
 }
 
+const STATUS_OPTIONS: SelectOption[] = [
+  { value: "all", label: "Status: All" },
+  { value: "pending", label: "Pending", dotColor: "bg-amber-500" },
+  { value: "in-progress", label: "In Progress", dotColor: "bg-blue-500" },
+  { value: "completed", label: "Completed", dotColor: "bg-emerald-500" },
+];
+
+const PRIORITY_OPTIONS: SelectOption[] = [
+  { value: "all", label: "Priority: All" },
+  { value: "high", label: "High", dotColor: "bg-rose-500" },
+  { value: "medium", label: "Medium", dotColor: "bg-amber-500" },
+  { value: "low", label: "Low", dotColor: "bg-emerald-500" },
+];
+
+const SORT_OPTIONS: SelectOption[] = [
+  { value: "newest", label: "Sort: Newest" },
+  { value: "oldest", label: "Sort: Oldest" },
+  { value: "priority", label: "Sort: Priority" },
+  { value: "due-date", label: "Sort: Due Date" },
+  { value: "title", label: "Sort: Title" },
+];
+
 export const TodoFilters: React.FC<TodoFiltersProps> = ({
   searchQuery,
   onSearchChange,
@@ -29,22 +52,22 @@ export const TodoFilters: React.FC<TodoFiltersProps> = ({
   hasActiveFilters,
 }) => {
   return (
-    <div className="flex flex-col gap-2.5 rounded border border-zinc-200/80 bg-white p-3 dark:border-zinc-800/80 dark:bg-zinc-900/50 sm:flex-row sm:items-center">
+    <div className="flex flex-col gap-2.5 rounded-sm border border-zinc-800 bg-zinc-900/60 p-3 sm:flex-row sm:items-center">
       {/* Search Bar */}
       <div className="relative flex-1">
-        <Search className="pointer-events-none absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-zinc-400 dark:text-zinc-500" />
+        <Search className="pointer-events-none absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-zinc-500" />
         <input
           type="text"
           value={searchQuery}
           onChange={(e) => onSearchChange(e.target.value)}
           placeholder="Search tasks..."
-          className="h-8 w-full rounded border border-zinc-200 bg-zinc-50/60 pl-8 pr-7 text-xs text-zinc-900 placeholder:text-zinc-400 transition-colors focus:border-zinc-900 focus:bg-white focus:outline-none dark:border-zinc-800 dark:bg-zinc-950/60 dark:text-zinc-100 dark:placeholder:text-zinc-500 dark:focus:border-zinc-100"
+          className="h-8 w-full rounded-sm border border-zinc-800 bg-zinc-900 pl-8 pr-7 text-xs text-zinc-100 placeholder:text-zinc-500 transition-colors focus:border-zinc-500 focus:outline-none"
         />
         {searchQuery && (
           <button
             type="button"
             onClick={() => onSearchChange("")}
-            className="absolute right-2 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300"
+            className="absolute right-2 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-zinc-300"
             aria-label="Clear search query"
           >
             <X className="h-3.5 w-3.5" />
@@ -52,60 +75,34 @@ export const TodoFilters: React.FC<TodoFiltersProps> = ({
         )}
       </div>
 
-      {/* 3 Dropdowns + Clear Button */}
+      {/* 3 Custom Dropdowns + Clear Button */}
       <div className="flex flex-wrap items-center gap-2">
         {/* Dropdown 1: Status */}
-        <div className="relative flex-1 sm:flex-none">
-          <select
-            value={statusFilter}
-            onChange={(e) =>
-              onStatusFilterChange(e.target.value as FilterStatus)
-            }
-            className="h-8 w-full cursor-pointer appearance-none rounded border border-zinc-200 bg-white pl-2.5 pr-6 text-xs text-zinc-700 transition-colors hover:bg-zinc-50 focus:border-zinc-900 focus:outline-none dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-300 sm:w-32"
-            aria-label="Filter by Status"
-          >
-            <option value="all">Status: All</option>
-            <option value="pending">Pending</option>
-            <option value="in-progress">In Progress</option>
-            <option value="completed">Completed</option>
-          </select>
-          <ChevronDown className="pointer-events-none absolute right-2 top-1/2 h-3 w-3 -translate-y-1/2 text-zinc-400" />
-        </div>
+        <CustomSelect
+          value={statusFilter}
+          onValueChange={(val) => onStatusFilterChange(val as FilterStatus)}
+          options={STATUS_OPTIONS}
+          aria-label="Filter by Status"
+          className="flex-1 sm:w-32 sm:flex-none"
+        />
 
         {/* Dropdown 2: Priority */}
-        <div className="relative flex-1 sm:flex-none">
-          <select
-            value={priorityFilter}
-            onChange={(e) =>
-              onPriorityFilterChange(e.target.value as FilterPriority)
-            }
-            className="h-8 w-full cursor-pointer appearance-none rounded border border-zinc-200 bg-white pl-2.5 pr-6 text-xs text-zinc-700 transition-colors hover:bg-zinc-50 focus:border-zinc-900 focus:outline-none dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-300 sm:w-32"
-            aria-label="Filter by Priority"
-          >
-            <option value="all">Priority: All</option>
-            <option value="high">High</option>
-            <option value="medium">Medium</option>
-            <option value="low">Low</option>
-          </select>
-          <ChevronDown className="pointer-events-none absolute right-2 top-1/2 h-3 w-3 -translate-y-1/2 text-zinc-400" />
-        </div>
+        <CustomSelect
+          value={priorityFilter}
+          onValueChange={(val) => onPriorityFilterChange(val as FilterPriority)}
+          options={PRIORITY_OPTIONS}
+          aria-label="Filter by Priority"
+          className="flex-1 sm:w-32 sm:flex-none"
+        />
 
         {/* Dropdown 3: Sort By */}
-        <div className="relative flex-1 sm:flex-none">
-          <select
-            value={sortOption}
-            onChange={(e) => onSortOptionChange(e.target.value as SortOption)}
-            className="h-8 w-full cursor-pointer appearance-none rounded border border-zinc-200 bg-white pl-2.5 pr-6 text-xs text-zinc-700 transition-colors hover:bg-zinc-50 focus:border-zinc-900 focus:outline-none dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-300 sm:w-36"
-            aria-label="Sort Tasks"
-          >
-            <option value="newest">Sort: Newest</option>
-            <option value="oldest">Sort: Oldest</option>
-            <option value="priority">Sort: Priority</option>
-            <option value="due-date">Sort: Due Date</option>
-            <option value="title">Sort: Title</option>
-          </select>
-          <ChevronDown className="pointer-events-none absolute right-2 top-1/2 h-3 w-3 -translate-y-1/2 text-zinc-400" />
-        </div>
+        <CustomSelect
+          value={sortOption}
+          onValueChange={(val) => onSortOptionChange(val as SortOption)}
+          options={SORT_OPTIONS}
+          aria-label="Sort Tasks"
+          className="flex-1 sm:w-34 sm:flex-none"
+        />
 
         {/* Clear Button */}
         <Button
@@ -114,7 +111,7 @@ export const TodoFilters: React.FC<TodoFiltersProps> = ({
           size="sm"
           onClick={onClearFilters}
           disabled={!hasActiveFilters}
-          className="h-8 gap-1 rounded border-zinc-200 px-2.5 text-xs text-zinc-600 transition-colors hover:bg-zinc-50 disabled:opacity-40 dark:border-zinc-800 dark:text-zinc-400 dark:hover:bg-zinc-900"
+          className="h-8 gap-1 rounded-md border-zinc-800 bg-zinc-900 px-2.5 text-xs text-zinc-300 hover:bg-zinc-800 hover:text-white disabled:opacity-40"
         >
           <RotateCcw className="h-3 w-3" />
           <span>Clear</span>

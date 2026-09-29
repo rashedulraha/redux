@@ -140,7 +140,7 @@ const HomePage: React.FC = () => {
   }, [tasks, searchQuery, statusFilter, priorityFilter, sortOption]);
 
   return (
-    <div className="min-h-screen bg-white py-8 dark:bg-zinc-950 sm:py-10">
+    <div className="min-h-screen bg-zinc-950 text-zinc-100 py-8 sm:py-10">
       <Container className="max-w-4xl space-y-5">
         {/* 1. Header with Redux ToDo, Subtitle, and New Task button */}
         <TodoHeader onOpenNewTask={() => setIsModalOpen(true)} />
@@ -182,11 +182,11 @@ const HomePage: React.FC = () => {
         />
 
         {/* Subtle Collapsible for Redux Counter practice */}
-        <div className="pt-4 border-t border-zinc-100 dark:border-zinc-900">
+        <div className="pt-4 border-t border-zinc-900">
           <button
             type="button"
             onClick={() => setShowCounter((prev) => !prev)}
-            className="flex items-center gap-1.5 text-xs text-zinc-400 transition-colors hover:text-zinc-700 dark:hover:text-zinc-300"
+            className="flex items-center gap-1.5 text-xs text-zinc-500 transition-colors hover:text-zinc-300"
           >
             <Layers className="h-3 w-3" />
             <span>
@@ -200,7 +200,7 @@ const HomePage: React.FC = () => {
           </button>
 
           {showCounter && (
-            <div className="mt-3 flex justify-center rounded border border-dashed border-zinc-200 p-4 dark:border-zinc-800">
+            <div className="mt-3 flex justify-center rounded-sm border border-dashed border-zinc-800 bg-zinc-900/40 p-4">
               <Counter />
             </div>
           )}
