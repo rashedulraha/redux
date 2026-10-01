@@ -95,8 +95,7 @@ export const TodoItem: React.FC<TodoItemProps> = ({
         isDone
           ? "border-zinc-850 bg-zinc-950/60"
           : "border-zinc-800 bg-zinc-900/60 hover:border-zinc-700"
-      }`}
-    >
+      }`}>
       {/* Left side: Checkbox + Content */}
       <div className="flex items-start gap-3 sm:items-center">
         {/* Apple-style clean Checkbox */}
@@ -108,8 +107,7 @@ export const TodoItem: React.FC<TodoItemProps> = ({
               ? "border-emerald-600 bg-emerald-600 text-white"
               : "border-zinc-700 bg-zinc-850 hover:border-zinc-500 text-transparent"
           }`}
-          aria-label={isDone ? "Mark as pending" : "Mark as completed"}
-        >
+          aria-label={isDone ? "Mark as pending" : "Mark as completed"}>
           {isDone && <Check className="h-3 w-3 stroke-[3]" />}
         </button>
 
@@ -118,11 +116,8 @@ export const TodoItem: React.FC<TodoItemProps> = ({
           <div className="flex flex-wrap items-center gap-2">
             <h3
               className={`text-xs font-medium tracking-tight sm:text-sm ${
-                isDone
-                  ? "text-zinc-500 line-through"
-                  : "text-zinc-100"
-              }`}
-            >
+                isDone ? "text-zinc-500 line-through" : "text-zinc-100"
+              }`}>
               {task.title}
             </h3>
 
@@ -138,11 +133,8 @@ export const TodoItem: React.FC<TodoItemProps> = ({
           {task.description && (
             <p
               className={`text-xs ${
-                isDone
-                  ? "text-zinc-500 line-through"
-                  : "text-zinc-400"
-              }`}
-            >
+                isDone ? "text-zinc-500 line-through" : "text-zinc-400"
+              }`}>
               {task.description}
             </p>
           )}
@@ -183,8 +175,7 @@ export const TodoItem: React.FC<TodoItemProps> = ({
             onClick={() => console.log("Edit task clicked:", task.id)}
             className="flex h-7 w-7 items-center justify-center rounded-md text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-zinc-200"
             title="Edit task"
-            aria-label="Edit task"
-          >
+            aria-label="Edit task">
             <Edit3 className="h-3.5 w-3.5" />
           </button>
 
@@ -194,8 +185,7 @@ export const TodoItem: React.FC<TodoItemProps> = ({
             onClick={() => onDelete(task.id)}
             className="flex h-7 w-7 items-center justify-center rounded-md text-zinc-400 transition-colors hover:bg-rose-950/40 hover:text-rose-400"
             title="Delete task"
-            aria-label="Delete task"
-          >
+            aria-label="Delete task">
             <Trash2 className="h-3.5 w-3.5" />
           </button>
         </div>
