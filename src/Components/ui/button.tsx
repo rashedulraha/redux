@@ -7,17 +7,14 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default:
-          "bg-white text-zinc-950 hover:bg-zinc-200 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200",
+        default: "bg-primary text-primary-foreground hover:bg-primary/90",
         outline:
-          "border-zinc-800 bg-zinc-900 text-zinc-200 hover:bg-zinc-800 hover:text-white dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800 dark:hover:text-white",
+          "border-input bg-background text-foreground hover:bg-accent hover:text-accent-foreground",
         secondary:
-          "bg-zinc-800 text-zinc-100 hover:bg-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700",
-        ghost:
-          "hover:bg-zinc-800 hover:text-zinc-100 dark:hover:bg-zinc-800 dark:hover:text-zinc-100",
-        destructive:
-          "border-rose-900/60 bg-rose-950/40 text-rose-300 hover:bg-rose-950/60 dark:border-rose-900/60 dark:bg-rose-950/40 dark:text-rose-300 dark:hover:bg-rose-950/60",
-        link: "text-zinc-100 underline-offset-4 hover:underline",
+          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        ghost: "hover:bg-accent hover:text-accent-foreground",
+        destructive: "bg-destructive text-white hover:bg-destructive/90",
+        link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
         default: "h-8 gap-1.5 px-3 text-xs",
@@ -34,7 +31,7 @@ const buttonVariants = cva(
       variant: "default",
       size: "default",
     },
-  }
+  },
 );
 
 function Button({
