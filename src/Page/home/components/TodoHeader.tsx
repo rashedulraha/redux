@@ -27,8 +27,7 @@ export const TodoHeader: React.FC<TodoHeaderProps> = ({ onOpenNewTask }) => {
         <Button
           onClick={onOpenNewTask}
           size="sm"
-          className="h-8 gap-1.5 rounded-md bg-white px-3 text-xs font-medium text-zinc-950 transition-colors hover:bg-zinc-200"
-        >
+          className="h-8 gap-1.5 rounded-md bg-primary px-3 text-xs font-medium text-primary-foreground transition-colors hover:bg-primary/90">
           <Plus className="h-3.5 w-3.5" />
           <span>New Task</span>
         </Button>
