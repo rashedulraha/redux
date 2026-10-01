@@ -5,7 +5,7 @@ import { TodoStats } from "./components/TodoStats";
 import { TodoFilters } from "./components/TodoFilters";
 import { TodoList } from "./components/TodoList";
 import { NewTaskModal } from "./components/NewTaskModal";
-import Counter from "./shared/Counter";
+
 import { ChevronDown, ChevronUp, Layers } from "lucide-react";
 import type {
   TaskItem,
@@ -50,7 +50,7 @@ const HomePage: React.FC = () => {
           return { ...task, status: nextStatus };
         }
         return task;
-      })
+      }),
     );
   };
 
@@ -61,12 +61,14 @@ const HomePage: React.FC = () => {
   const handleStatusChange = (id: string, newStatus: TaskItem["status"]) => {
     setTasks((prev) =>
       prev.map((task) =>
-        task.id === id ? { ...task, status: newStatus } : task
-      )
+        task.id === id ? { ...task, status: newStatus } : task,
+      ),
     );
   };
 
-  const handleCreateTask = (newTaskData: Omit<TaskItem, "id" | "createdAt">) => {
+  const handleCreateTask = (
+    newTaskData: Omit<TaskItem, "id" | "createdAt">,
+  ) => {
     const newTask: TaskItem = {
       ...newTaskData,
       id: `task-${Date.now()}`,
@@ -140,8 +142,8 @@ const HomePage: React.FC = () => {
   }, [tasks, searchQuery, statusFilter, priorityFilter, sortOption]);
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100 py-8 sm:py-10">
-      <Container className="max-w-4xl space-y-5">
+    <div className="min-h-screen bg-background text-foreground py-8 sm:py-10">
+      <Container className="space-y-5">
         {/* 1. Header with Redux ToDo, Subtitle, and New Task button */}
         <TodoHeader onOpenNewTask={() => setIsModalOpen(true)} />
 
@@ -186,12 +188,9 @@ const HomePage: React.FC = () => {
           <button
             type="button"
             onClick={() => setShowCounter((prev) => !prev)}
-            className="flex items-center gap-1.5 text-xs text-zinc-500 transition-colors hover:text-zinc-300"
-          >
+            className="flex items-center gap-1.5 text-xs text-zinc-500 transition-colors hover:text-zinc-300">
             <Layers className="h-3 w-3" />
-            <span>
-              {showCounter ? "Hide" : "Show"} Redux Counter Widget
-            </span>
+            <span>{showCounter ? "Hide" : "Show"} Redux Counter Widget</span>
             {showCounter ? (
               <ChevronUp className="h-3 w-3" />
             ) : (
@@ -201,7 +200,7 @@ const HomePage: React.FC = () => {
 
           {showCounter && (
             <div className="mt-3 flex justify-center rounded-sm border border-dashed border-zinc-800 bg-zinc-900/40 p-4">
-              <Counter />
+              <h1>Hello world</h1>
             </div>
           )}
         </div>
