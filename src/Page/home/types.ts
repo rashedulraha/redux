@@ -24,4 +24,9 @@ export interface TaskStats {
 
 export type FilterStatus = "all" | TaskStatus;
 export type FilterPriority = "all" | TaskPriority;
-export type SortOption = "newest" | "oldest" | "priority" | "due-date" | "title";
+export type SortOption =
+  | "newest"
+  | "oldest"
+  | "priority"
+  | "due-date"
+  | "title";
