@@ -72,7 +72,9 @@ export const NewTaskModal: React.FC<NewTaskModalProps> = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent onClose={onClose} className="rounded-sm border border-zinc-800 bg-zinc-950 sm:max-w-md">
+      <DialogContent
+        onClose={onClose}
+        className="rounded-sm border border-zinc-800 bg-zinc-950 sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Create New Task</DialogTitle>
           <DialogDescription>
@@ -85,8 +87,7 @@ export const NewTaskModal: React.FC<NewTaskModalProps> = ({
           <div className="space-y-1">
             <label
               htmlFor="task-title"
-              className="text-xs font-medium text-zinc-300"
-            >
+              className="text-xs font-medium text-zinc-300">
               Task Title <span className="text-rose-400">*</span>
             </label>
             <Input
@@ -104,8 +105,7 @@ export const NewTaskModal: React.FC<NewTaskModalProps> = ({
           <div className="space-y-1">
             <label
               htmlFor="task-desc"
-              className="text-xs font-medium text-zinc-300"
-            >
+              className="text-xs font-medium text-zinc-300">
               Description
             </label>
             <textarea
@@ -122,9 +122,7 @@ export const NewTaskModal: React.FC<NewTaskModalProps> = ({
           <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
             {/* Priority */}
             <div className="space-y-1">
-              <label
-                className="flex items-center gap-1 text-xs font-medium text-zinc-300"
-              >
+              <label className="flex items-center gap-1 text-xs font-medium text-zinc-300">
                 <Flag className="h-3 w-3 text-zinc-500" />
                 Priority
               </label>
@@ -139,9 +137,7 @@ export const NewTaskModal: React.FC<NewTaskModalProps> = ({
 
             {/* Status */}
             <div className="space-y-1">
-              <label
-                className="flex items-center gap-1 text-xs font-medium text-zinc-300"
-              >
+              <label className="flex items-center gap-1 text-xs font-medium text-zinc-300">
                 <Clock className="h-3 w-3 text-zinc-500" />
                 Initial Status
               </label>
@@ -161,8 +157,7 @@ export const NewTaskModal: React.FC<NewTaskModalProps> = ({
             <div className="space-y-1">
               <label
                 htmlFor="task-duedate"
-                className="flex items-center gap-1 text-xs font-medium text-zinc-300"
-              >
+                className="flex items-center gap-1 text-xs font-medium text-zinc-300">
                 <Calendar className="h-3 w-3 text-zinc-500" />
                 Due Date
               </label>
@@ -179,8 +174,7 @@ export const NewTaskModal: React.FC<NewTaskModalProps> = ({
             <div className="space-y-1">
               <label
                 htmlFor="task-category"
-                className="flex items-center gap-1 text-xs font-medium text-zinc-300"
-              >
+                className="flex items-center gap-1 text-xs font-medium text-zinc-300">
                 <Tag className="h-3 w-3 text-zinc-500" />
                 Category
               </label>
@@ -200,15 +194,13 @@ export const NewTaskModal: React.FC<NewTaskModalProps> = ({
               variant="outline"
               size="sm"
               onClick={onClose}
-              className="h-8 rounded-md text-xs border-zinc-800 text-zinc-300 hover:bg-zinc-900"
-            >
+              className="h-8 rounded-md text-xs border-zinc-800 text-zinc-300 hover:bg-zinc-900">
               Cancel
             </Button>
             <Button
               type="submit"
               size="sm"
-              className="h-8 gap-1.5 rounded-md bg-white text-xs font-medium text-zinc-950 hover:bg-zinc-200"
-            >
+              className="h-8 gap-1.5 rounded-md bg-primary text-xs font-medium text-primary-foreground hover:bg-primary/90">
               <Plus className="h-3.5 w-3.5" />
               <span>Create Task</span>
             </Button>
