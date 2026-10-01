@@ -95,16 +95,14 @@ export const TodoList: React.FC<TodoListProps> = ({
                   variant="outline"
                   size="sm"
                   onClick={onResetFilters}
-                  className="rounded-md text-xs"
-                >
+                  className="rounded-md text-xs">
                   Reset Filters
                 </Button>
               ) : (
                 <Button
                   size="sm"
                   onClick={onOpenNewTask}
-                  className="rounded-md bg-white text-zinc-950 hover:bg-zinc-200 text-xs"
-                >
+                  className="rounded-md bg-primary text-primary-foreground hover:bg-primary/90 text-xs">
                   Create First Task
                 </Button>
               )}
