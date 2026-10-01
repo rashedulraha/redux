@@ -1,6 +1,6 @@
 import RootLayout from "@/Components/layout/RootLayout";
 import About from "@/Page/About/About";
-import Service from "@/Page/About/Service/Service";
+import Service from "@/Page/Service/Service";
 
 import HomePage from "@/Page/home/HomePage";
 
